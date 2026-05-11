@@ -1,0 +1,18 @@
+{
+  "name": "automation-exercise-playwright",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:single": "playwright test --grep \"@single\"",
+    "report": "playwright show-report",
+    "debug": "PWDEBUG=1 playwright test --ui",
+    "html-report": "playwright test --reporter=html"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.6.2"
+  }
+}

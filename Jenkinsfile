@@ -1,35 +1,47 @@
 pipeline {
-    agent any
 
-    tools {
-        maven 'Maven 3'
-    }
+    agent any
 
     stages {
 
         stage('Clone Repository') {
+
             steps {
-                git branch: 'main',
-                url: 'https://github.com/Manoharjangid1818/Automation-Exercise-Playwright-.git'
+
+                git 'https://github.com/Manoharjangid1818/Automation-Exercise-Playwright-.git'
             }
         }
 
-        stage('Build Project') {
+        stage('Install Dependencies') {
+
             steps {
-                bat 'mvn clean compile'
+
+                bat 'npm install'
+            }
+        }
+
+        stage('Install Browsers') {
+
+            steps {
+
+                bat 'npx playwright install'
             }
         }
 
         stage('Run Tests') {
+
             steps {
-                bat 'mvn test'
+
+                bat 'npx playwright test'
             }
         }
     }
 
     post {
+
         always {
-            junit 'target/surefire-reports/*.xml'
+
+            archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
         }
     }
 }
