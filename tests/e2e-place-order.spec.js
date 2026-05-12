@@ -75,6 +75,16 @@ test('E2E Place Order Flow', async ({ page }) => {
 
     await checkoutPage.placeOrder();
 
+    Logger.step('Filling Card Details');
+
+    await checkoutPage.fillCardDetails('Manohar', '7747747746663', '311', '12', '2030');
+
+    await page.waitForTimeout(2000);
+
+    await expect(
+        page.locator('body')
+    ).toContainText('Order Placed!');
+
     Logger.success('Order Placed Successfully');
 
     Logger.completed();

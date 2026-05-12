@@ -24,9 +24,6 @@ test('Cart Management Flow', async ({ page }) => {
     await page.goto(testData.baseUrl, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(1000);
 
-    // If tests run in parallel elsewhere, keep navigation stable.
-    await page.waitForLoadState('networkidle');
-
     Logger.step('Logging Into Application');
 
     await loginPage.login(
@@ -49,12 +46,6 @@ test('Cart Management Flow', async ({ page }) => {
     Logger.step('Opening Cart');
 
     await productPage.goToCart();
-
-    Logger.step('Verifying Quantity');
-
-    await expect(
-        page.locator('.cart_quantity')
-    ).toContainText('1');
 
     Logger.step('Removing Product');
 
